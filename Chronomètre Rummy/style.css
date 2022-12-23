@@ -1,0 +1,181 @@
+@font-face {
+     font-family: comfortaa;
+     src: url('images/comfortaa.ttf');
+     font-weight: normal;
+     font-style: normal;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: comfortaa;
+}
+
+.view {
+	display: none;
+	height: 100vh;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.view:target {
+	display: flex;
+}
+
+.options-bar {
+	display: flex;
+	margin-top: 50px;
+}
+
+.options-bar button {
+	height: 50px;
+	width: 50px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25px;
+	border-radius: 50%;
+	border: none;
+	margin: 0 10px 0 10px;
+	cursor: pointer;
+}
+
+.options-bar button:disabled {
+	display: none;
+}
+
+.icon-compress {
+	background-image: url('images/compress.svg');
+}
+
+.icon-expand {
+	background-image: url('images/expand.svg');
+}
+
+.icon-hourglass {
+	background-image: url('images/hourglass.svg');
+}
+
+.icon-hourglass-half {
+	background-image: url('images/hourglass-half.svg');
+}
+
+.icon-hourglass-end {
+	background-image: url('images/hourglass-end.svg');
+}
+
+.icon-mute {
+	background-image: url('images/mute.svg');
+}
+
+.icon-pause {
+	background-image: url('images/pause.svg');
+}
+
+.icon-start {
+	background-image: url('images/start.svg');
+}
+
+.icon-stop {
+	background-image: url('images/stop.svg');
+}
+
+.animated-hourglass {
+	background-image: url('images/hourglass.svg');
+	animation: flip 0.5s;
+}
+
+.spinner-circle-container {
+	position: relative;
+	min-height: 500px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+#spinner-circle {
+	height: 500px;
+	width: 500px;
+	animation: spin 10s infinite linear paused;
+}
+
+#spinner-circle.animed {
+	animation-play-state: running;
+}
+
+#spinner-circle.not-animed, #spinner-circle.finish {
+	animation: none;
+}
+
+#spinner-circle circle {
+	fill: transparent;
+	r: 80px;
+	cx: 85px;
+	cy: 85px;
+}
+
+#spinner-circle circle.hidden {
+	visibility: hidden;
+}
+
+#spinner-circle circle:first-child {
+	stroke-width: 10;
+	stroke: rgb(232, 235, 237);
+}
+
+#spinner-circle circle:last-child {
+	stroke-dasharray: 502.655;
+	stroke-dashoffset: 503;
+	stroke-width: 10;
+	stroke: rgb(82, 104, 255);
+	stroke-linecap: round;
+	animation: progress linear paused;
+}
+
+#spinner-circle.animed circle:last-child {
+	animation-play-state: running;
+}
+
+#spinner-circle.not-animed circle:last-child {
+	animation: none;
+}
+
+#spinner-circle.finish circle:last-child {
+	visibility: hidden;
+}
+
+#time {
+	font-size: 200px;
+	position: absolute;
+	top: 160px;
+}
+
+@keyframes flip {
+	from {
+		transform: rotate(180deg);
+	}
+	to {
+		transform: rotate(0deg);
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes progress {
+	from {
+		stroke-dashoffset: 0;
+	}
+	to {
+		stroke-dashoffset: 503;
+	}
+}
