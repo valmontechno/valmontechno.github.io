@@ -19,7 +19,7 @@ pauseButton.addEventListener('click', pause);
 stopButton.addEventListener('click', stop);
 fullscreenButton.addEventListener('click', fullscreen);
 
-const LAP_DURATION = 5;
+const LAP_DURATION = 60;
 
 let players = [];
 let lap = 0;
