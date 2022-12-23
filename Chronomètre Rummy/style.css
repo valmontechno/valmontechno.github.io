@@ -5,10 +5,20 @@
      font-style: normal;
 }
 
+:root {
+	--main-color: #5268ff;
+	--error-color: #ff4d4d;
+	--text-color: #484844;
+	--background-color: #fffdf0;
+	--spinner-background-color: #e8ebed;
+}
+
 body {
 	margin: 0;
 	padding: 0;
 	font-family: comfortaa;
+	color: var(--text-color);
+	background: var(--background-color);
 }
 
 .view {
@@ -23,9 +33,16 @@ body {
 	display: flex;
 }
 
+.view > * {
+	margin: 20px 0 20px 0;
+}
+
+#player {
+	font-size: xx-large;
+}
+
 .options-bar {
 	display: flex;
-	margin-top: 50px;
 }
 
 .options-bar button {
@@ -86,19 +103,28 @@ body {
 }
 
 .spinner-circle-container {
-	position: relative;
-	min-height: 500px;
+	width: 70%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	overflow: hidden;
-	border-radius: 50%;
 	cursor: pointer;
 }
 
+#time {
+	font-size: 100px;
+	position: absolute;
+}
+
+#time.start {
+	height: 100px;
+	width: 100px;
+	background: url('images/start.svg') no-repeat;
+	background-position: center;
+}
+
 #spinner-circle {
-	height: 500px;
-	width: 500px;
+	max-width: 300px;
+	height: 100%;
 	animation: spin 10s infinite linear paused;
 }
 
@@ -123,14 +149,18 @@ body {
 
 #spinner-circle circle:first-child {
 	stroke-width: 10;
-	stroke: rgb(232, 235, 237);
+	stroke: var(--spinner-background-color);
+}
+
+#spinner-circle.finish circle:first-child {
+	animation: red-alert 1s infinite alternate linear;
 }
 
 #spinner-circle circle:last-child {
 	stroke-dasharray: 502.655;
 	stroke-dashoffset: 503;
 	stroke-width: 10;
-	stroke: rgb(82, 104, 255);
+	stroke: var(--main-color);
 	stroke-linecap: round;
 	animation: progress linear paused;
 }
@@ -145,12 +175,6 @@ body {
 
 #spinner-circle.finish circle:last-child {
 	visibility: hidden;
-}
-
-#time {
-	font-size: 200px;
-	position: absolute;
-	top: 160px;
 }
 
 @keyframes flip {
@@ -177,5 +201,14 @@ body {
 	}
 	to {
 		stroke-dashoffset: 503;
+	}
+}
+
+@keyframes red-alert {
+	from {
+		stroke: var(--spinner-background-color);
+	}
+	to {
+		stroke: var(--error-color);
 	}
 }

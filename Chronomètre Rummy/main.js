@@ -1,11 +1,9 @@
-/* window.addEventListener("beforeunload", function (e) {
-  e.returnValue = '\o/';
-  return '\o/';
-}); */
+// window.addEventListener("beforeunload", function (e) {
+  // e.returnValue = '\o/';
+  // return '\o/';
+// });
 
-if(document.location.hash != 'chrono')
-	document.location.hash = 'chrono'
-
+const playerDisplay = document.getElementById('player');
 const timeDisplay = document.getElementById('time');
 const startButton = document.getElementById('start');
 const pauseButton = document.getElementById('pause');
@@ -21,8 +19,9 @@ pauseButton.addEventListener('click', pause);
 stopButton.addEventListener('click', stop);
 fullscreenButton.addEventListener('click', fullscreen);
 
-const LAP_DURATION = 60;
+const LAP_DURATION = 5;
 
+let players = [];
 let lap = 0;
 let time = 0;
 let paused = true;
@@ -32,6 +31,12 @@ const alarmSound = new Audio('sounds/not-kiddin.mp3');
 alarmSound.loop = true;
 const finishSound = new Audio('sounds/done-for-you.mp3');
 spinnerProgressBar.style.animationDuration = LAP_DURATION + 's';
+
+/*if(players.length)
+	document.location.hash = 'chrono'
+else
+	document.location.hash = 'select-players'*/
+document.location.hash = 'chrono'
 
 function addSecond() {
     time--;
@@ -60,6 +65,7 @@ function start() {
 		spinnerCircle.setAttribute('class', 'animed');
 	}, 0);
 	spinnerProgressBar.removeAttribute('class');
+	timeDisplay.removeAttribute('class');
 	startButton.className = 'animated-hourglass';
 	stopButton.removeAttribute('disabled');
 	pauseButton.removeAttribute('disabled');
@@ -67,6 +73,7 @@ function start() {
 	paused = false;
 	lap++;
 	time = LAP_DURATION;
+    playerDisplay.textContent = players[(lap-1) % players.length];
 	timeDisplay.textContent = time;
 	clearTimeout(timeout);
 	timeout = setTimeout(addSecond, 1000);

@@ -2,17 +2,23 @@
 <html>
 	<head>
 		<title>Chronomètre Rummy</title>
+		<link rel="icon" href="images/favicon.ico">
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="style.css" type="text/CSS">
 	</head>
 	<body>
+		<div id="select-players" class="view">
+			<h1>Qui va jouer?</h1>
+			<label>Nombre de joueurs<input name="number-players" type="number" min="2" max="6"></label>
+		</div>
 		<div id="chrono" class="view">
+			<span id="player">&nbsp;</span>
 			<div class="spinner-circle-container">
 				<svg id="spinner-circle" viewBox="0 0 170 170">
 					<circle></circle>
 					<circle class="hidden"></circle>
 				</svg>
-				<span id="time"></span>
+				<span id="time" class="start"></span>
 			</div>
 			<div class="options-bar">
 				<button id="start" class="icon-start"></button>
