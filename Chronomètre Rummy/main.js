@@ -13,7 +13,6 @@ const spinnerCircle = document.getElementById('spinner-circle');
 const spinnerProgressBar = spinnerCircle.lastElementChild;
 
 spinnerCircle.parentNode.addEventListener('click', start);
-spinnerCircle.parentNode.addEventListener('contextmenu', start);
 startButton.addEventListener('click', start);
 pauseButton.addEventListener('click', pause);
 restartButton.addEventListener('click', restart);
@@ -49,8 +48,7 @@ function addSecond() {
 	}
 }
 
-function start(e) {
-	e.preventDefault();
+function start() {
 	alarmSound.pause();
 	finishSound.currentTime = 0;
 	finishSound.play();
