@@ -7,10 +7,12 @@
 
 :root {
 	--main-color: #5268ff;
+	--main-color-transparent: #5268ffa6;
 	--error-color: #ff4d4d;
 	--text-color: #484844;
 	--background-color: #fffdf0;
-	--spinner-background-color: #e8ebed;
+	--second-background-color: #e8ebed;
+	--border-radius: 5px;
 }
 
 body {
@@ -22,19 +24,27 @@ body {
 }
 
 .view {
-	display: none;
+	display: flex;
 	height: 100vh;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
 
-.view:target {
-	display: flex;
-}
-
 .view > * {
 	margin: 20px 0 20px 0;
+}
+
+input{
+	background: var(--second-background-color);
+	border: none;
+	border-radius: var(--border-radius);
+	outline: none;
+	transition: all .5s ease;
+}
+
+input:focus {
+	box-shadow: 0 0 0 4px var(--main-color-transparent);
 }
 
 #player {
@@ -48,6 +58,7 @@ body {
 .options-bar button {
 	height: 50px;
 	width: 50px;
+	background-color: var(--second-background-color);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 25px;
@@ -93,8 +104,8 @@ body {
 	background-image: url('images/start.svg');
 }
 
-.icon-stop {
-	background-image: url('images/stop.svg');
+.icon-restart {
+	background-image: url('images/restart.svg');
 }
 
 .animated-hourglass {
@@ -149,7 +160,7 @@ body {
 
 #spinner-circle circle:first-child {
 	stroke-width: 10;
-	stroke: var(--spinner-background-color);
+	stroke: var(--second-background-color);
 }
 
 #spinner-circle.finish circle:first-child {
@@ -206,7 +217,7 @@ body {
 
 @keyframes red-alert {
 	from {
-		stroke: var(--spinner-background-color);
+		stroke: var(--second-background-color);
 	}
 	to {
 		stroke: var(--error-color);

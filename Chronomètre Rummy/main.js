@@ -1,26 +1,25 @@
-// window.addEventListener("beforeunload", function (e) {
-  // e.returnValue = '\o/';
-  // return '\o/';
-// });
+window.addEventListener("beforeunload", function (e) {
+  e.returnValue = '\o/';
+  return '\o/';
+});
 
 const playerDisplay = document.getElementById('player');
 const timeDisplay = document.getElementById('time');
 const startButton = document.getElementById('start');
 const pauseButton = document.getElementById('pause');
-const stopButton = document.getElementById('stop');
+const restartButton = document.getElementById('restart');
 const fullscreenButton = document.getElementById('fullscreen');
 const spinnerCircle = document.getElementById('spinner-circle');
 const spinnerProgressBar = spinnerCircle.lastElementChild;
 
-
 spinnerCircle.parentNode.addEventListener('click', start);
+spinnerCircle.parentNode.addEventListener('contextmenu', start);
 startButton.addEventListener('click', start);
 pauseButton.addEventListener('click', pause);
-stopButton.addEventListener('click', stop);
+restartButton.addEventListener('click', restart);
 fullscreenButton.addEventListener('click', fullscreen);
 
 const LAP_DURATION = 60;
-
 let players = [];
 let lap = 0;
 let time = 0;
@@ -31,12 +30,6 @@ const alarmSound = new Audio('sounds/not-kiddin.mp3');
 alarmSound.loop = true;
 const finishSound = new Audio('sounds/done-for-you.mp3');
 spinnerProgressBar.style.animationDuration = LAP_DURATION + 's';
-
-/*if(players.length)
-	document.location.hash = 'chrono'
-else
-	document.location.hash = 'select-players'*/
-document.location.hash = 'chrono'
 
 function addSecond() {
     time--;
@@ -56,7 +49,8 @@ function addSecond() {
 	}
 }
 
-function start() {
+function start(e) {
+	e.preventDefault();
 	alarmSound.pause();
 	finishSound.currentTime = 0;
 	finishSound.play();
@@ -67,7 +61,7 @@ function start() {
 	spinnerProgressBar.removeAttribute('class');
 	timeDisplay.removeAttribute('class');
 	startButton.className = 'animated-hourglass';
-	stopButton.removeAttribute('disabled');
+	restartButton.removeAttribute('disabled');
 	pauseButton.removeAttribute('disabled');
 	pauseButton.className = 'icon-pause';
 	paused = false;
@@ -92,15 +86,15 @@ function pause() {
 		} else {
 			timeout = setTimeout(addSecond, 1000);
 			pauseButton.className = 'icon-pause';
-			stopButton.removeAttribute('disabled');
+			restartButton.removeAttribute('disabled');
 			spinnerCircle.setAttribute('class', 'animed');
 		}
 	}
 }
 
-function stop() {
+function restart() {
 	alarmSound.pause();
-	stopButton.setAttribute('disabled', '');
+	restartButton.setAttribute('disabled', '');
 	pauseButton.className = 'icon-start';
 	pauseButton.removeAttribute('disabled');
 	startButton.className = 'animated-hourglass';
